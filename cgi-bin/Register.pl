@@ -20,8 +20,8 @@ my $repassword = param('re-password');
 my $MSG;
 
 #Check name validity
-if( not (length($name) <= 100 and $name =~ /[a-zA-Z]/ and $name =~ /^[a-zA-Z ]+$/ ) ){
-	SHOW("Name must consist entirely of at most 100 ASCII letters and spaces.<br/>\n$REGISTERBUTTON");
+if( not ( $name =~ /[a-zA-Z]/ and $name =~ /^[a-zA-Z ]{1,100}$/ ) ){
+	SHOW("Name must consist of at most 100 ASCII letters and spaces.<br/>\n$REGISTERBUTTON");
 }
 else{
 	$name =~ s/^\s+|\s+$//g;
@@ -31,7 +31,7 @@ else{
 
 #Check username validity and availability
 if ( not (length($username) <= 20 and $username =~ /^[a-zA-Z][a-zA-Z0-9]{3,}$/ ) ){
-	SHOW("Username must consist entirely of 4-20 ASCII letters and digits, and start with a letter.<br/>\n$REGISTERBUTTON");
+	SHOW("Username must consist of 4-20 ASCII letters and digits, and start with a letter.<br/>\n$REGISTERBUTTON");
 } 
 else{
 	if ( REGISTERED( $username ) ){
@@ -40,8 +40,8 @@ else{
 }
 
 #Check password validity
-if ( length($password) < 4 or length($password) > 100 or $password =~ /\s/ ){
-	SHOW("The password must be 4-30 ASCII characters, with no whitespaces.<br/>\n$REGISTERBUTTON");
+if ( $password !~ /^[a-zA-Z0-9]{4,30}$/ ){
+	SHOW("Password must consist of 4-30 ASCII letters and digits.<br/>\n$REGISTERBUTTON");
 }
 else{
 	$MSG=$MSG."$password is a valid password.<br/>";
