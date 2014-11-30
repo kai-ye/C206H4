@@ -3,7 +3,7 @@ use strict;
 #use CGI ':standard';
 use CGI qw/ :standard -debug /;
 
-my $membersFile = '../Users.txt';
+my $membersFile = '../CSV/Members.csv';
 my $REGISTERBUTTON = qq{
 <br/>
 <form action="../Registration.html">
@@ -21,40 +21,38 @@ my $MSG;
 
 #Check name validity
 if( not ( $name =~ /[a-zA-Z]/ and $name =~ /^[a-zA-Z ]{1,100}$/ ) ){
-	SHOW("Name must consist of at most 100 ASCII letters and spaces.<br/>\n$REGISTERBUTTON");
+	SHOW("Name must consist of at most 100 ASCII letters and spaces.<br/>
+		\n$REGISTERBUTTON");
 }
-else{
-	$name =~ s/^\s+|\s+$//g;
-	$name =~ s/\s{2,}/ /g;
-	$MSG=$MSG."$name is a valid name.<br/>";
-}
+$name =~ s/^\s+|\s+$//g;	#remove leading and trailing whitespaces
+$name =~ s/\s{2,}/ /g;		#replace multiple spaces with single ones
+$MSG=$MSG."You entered a valid name.<br/>";
 
 #Check username validity and availability
-if ( not (length($username) <= 20 and $username =~ /^[a-zA-Z][a-zA-Z0-9]{3,}$/ ) ){
-	SHOW("Username must consist of 4-20 ASCII letters and digits, and start with a letter.<br/>\n$REGISTERBUTTON");
+if ( not (length($username) <= 20 and $username =~ /^[a-zA-Z][a-zA-Z0-9]{2,}$/ ) ){
+	SHOW("Username must consist of 3-20 ASCII letters and digits,
+		and start with a letter.<br/>\n$REGISTERBUTTON");
 } 
 else{
 	if ( REGISTERED( $username ) ){
-		SHOW("Username already exists. Please try a different one.<br/>\n$REGISTERBUTTON");
+		SHOW("Username already exists. Please try a different one.<br/>
+			\n$REGISTERBUTTON");
 	}
 }
 
 #Check password validity
 if ( $password !~ /^[a-zA-Z0-9]{4,30}$/ ){
-	SHOW("Password must consist of 4-30 ASCII letters and digits.<br/>\n$REGISTERBUTTON");
+	SHOW("Password must consist of 4-30 ASCII letters and digits.<br/>
+		\n$REGISTERBUTTON");
 }
-else{
-	$MSG=$MSG."$password is a valid password.<br/>";
-}
+$MSG=$MSG."You entered a valid password.<br/>";
 
 #Check correctedness of re-typed password
 if( $password ne $repassword ){
 	SHOW("Re-typed password did not match.<br/>\n$REGISTERBUTTON");
 }
-else{
-	$MSG=$MSG."Re-typed password matched.<br/>";
-	REGISTER();
-}
+$MSG=$MSG."Re-typed password matched.<br/>";
+REGISTER();
 
 
 open(USERS, "<$membersFile");
@@ -99,7 +97,7 @@ sub SHOW{
 	<center>
 	<table>
 	<tr>
-		<td><a href="">Home</a>
+		<td><a href="../index.html">Home</a>
 	</tr>
 	</table>
 	</center>
