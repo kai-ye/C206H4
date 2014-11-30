@@ -3,6 +3,7 @@
 #include <string.h>
 #include <unistd.h>
 
+#define ERRORLOG "Errors.log"
 #define MAXKEYLEN 20
 #define MAXVALUELEN 40
 #define MAXNAMELEN 100
@@ -29,6 +30,7 @@ int loggedIn ( const char* );
 void logInAndShowCatalogue( const char*, const char*);
 void checkMalloc( const void*, const char*);
 void exitWith( const char*, const int);
+void report( const char* );
 
 
 
@@ -108,7 +110,7 @@ void putsDecoded( char* s, int* lenPtr, const char delim ){
 		}
 		else{
 			--*lenPtr;
-			if ( c == '+' )
+			if ( c == '+' )//replace + with space
 				c = ' ';
 		}
 		s[i] = c;
@@ -166,24 +168,26 @@ void logInAndShowCatalogue( const char* username, const char* name){
 
 	if( ( OUT = fopen( LOGGEDINCSV, "at") ) == NULL )
 		exitWith( "Did someone just delete the loggedIn csv?", EXIT_FAILURE);
-	fprintf( OUT, "%s\n", username );
+	fprintf( OUT, "%s\n", username );//appends username to loggedIn csv
 	fclose( OUT );
 	
-	//Generate Catalogue
+	//Generate Catalogue from static Catalogue html
 	if( ( IN = fopen( CATALOGUEHTML, "rt") ) == NULL )
 		exitWith( "Catalogue html could not be opened.", EXIT_FAILURE);
 	
 	printf("Content-type:text/html\n\n");
 	fgets( line, CATALOGUEHTMLCOLS+3, IN );
-	while( !feof( IN ) && strstr( line, GRABPOINT) == NULL ){
+	while( !feof( IN ) && strstr( line, GRABPOINT) == NULL ){//look for GRABPOINT
 		fputs( line, stdout );
-		if( strstr( line, GREETGRABPOINT) )
-			printf("Welcome, %s", name);
+		if( strstr( line, GREETGRABPOINT) )//if GREETGRABPOINT found
+			printf("Welcome, %s", name);//output greeting with name here
 		fgets( line, CATALOGUEHTMLCOLS+3, IN );
 	}
 
-	if( feof( IN ) )//If grab point not found
-		system("echo Login.c: grab point not found >>error.log");
+	if( feof( IN ) ){	//If GRABPOINT not found
+		report("Login.c: grab point not found in Catalogue.html");
+		puts("<p style=\"color:#CC0000\">Error: grab point not found in Catalogue.html</p>");
+	}
 	else{
 		printf("<input type=\"hidden\" name=\"username\" value=\"%s\">", username);
 		fgets( line, CATALOGUEHTMLCOLS+3, IN );//skip the line with GRABPOINT
@@ -209,4 +213,13 @@ void exitWith( const char* Message, const int exitValue){
 	puts("Content-type:text/html\n\n");
 	printf("%s", Message);
 	exit( exitValue );
+}
+
+//Appends message to error log
+void report( const char* Message){
+	FILE *OUT;
+	if( ( OUT = fopen( ERRORLOG, "at" ) ) != NULL ){
+		fprintf( OUT, "%s\n", Message);
+		fclose( OUT );
+	}
 }
