@@ -64,8 +64,8 @@ int main(int argc, char* argv[]){
 
 	if( ( name = matchingName( username, password ) ) == NULL )
 		exitWith( "No match for the username and password entered.", EXIT_FAILURE);
-	if( loggedIn( username ) )//whether already logged in
-		exitWith( "You are already logged in from somewhere else.", EXIT_FAILURE);
+	/*if( loggedIn( username ) )//whether already logged in
+		exitWith( "You are already logged in from somewhere else.", EXIT_FAILURE);*/
 	logInAndShowCatalogue( username , name);
 
 	return 0;
@@ -166,10 +166,12 @@ void logInAndShowCatalogue( const char* username, const char* name){
 	FILE *OUT, *IN;
 	char line[CATALOGUEHTMLCOLS+3];
 
-	if( ( OUT = fopen( LOGGEDINCSV, "at") ) == NULL )
-		exitWith( "Did someone just delete the loggedIn csv?", EXIT_FAILURE);
-	fprintf( OUT, "%s\n", username );//appends username to loggedIn csv
-	fclose( OUT );
+	if( !loggedIn( username ) ) {//if not already logged in
+		if( ( OUT = fopen( LOGGEDINCSV, "at") ) == NULL )
+			exitWith( "Did someone just delete the loggedIn csv?", EXIT_FAILURE);
+		fprintf( OUT, "%s\n", username );//appends username to loggedIn csv
+		fclose( OUT );
+	}
 	
 	//Generate Catalogue from static Catalogue html
 	if( ( IN = fopen( CATALOGUEHTML, "rt") ) == NULL )
