@@ -1,42 +1,43 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="http://www.cs.mcgill.ca/~kye/style1.css"/>
 		<title>Login</title>
 	</head>
 
 	<body>
-		<br/><br/><center>  <ul>
-  					<li><a href="./Home.html">Home</a></li>
-  					<li><a href="./Catalogue.html">Catalogue</a></li>
- 					<li><a href="./Login.html"target="_self">Login</a></li>
-				   </ul>
+		<center>
+        <table class="menu">
+                <tr>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/index.html">Home</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Catalogue.html">Catalogue</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Login.html" target="_blank">Login</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Registration.html">Register</a></td>
+                </tr>
+        </table>
 
-				<br/><br/><br/><br/>
-		
+		<br/><br/><br/><br/><br/><br/>
 			<h6>Bare-bones login page,<br/>
 			    recycled from bare-bones registration page.<br/>
 			    Perhaps change to a more specific font.
 			</h6>
-			<form action="./cgi-bin/Login.cgi" method="post">
-			<table border="0">
+			<form action="http://www.cs.mcgill.ca/~kye/cgi-bin/Login.cgi" method="post">
+			<table class="input-boxes" border="0">
 			<tr>
-				<td>Username</td>
-				<td><input type="text" maxlength="20" name="username"></td>
-				<td>Try and break it.</td>
+				<td><p>Username</p></td>
+				<td><input type="text" class="text-input" maxlength="20" name="username"></td>
+				<td><p>Try and break it.</p></td>
 			<tr>
 				<td>Password</td>
-				<td><input type="password" maxlength="30" name="password"></td>
+				<td><input type="password" class="text-input" maxlength="30" name="password"></td>
 				<td>Try and break it..</td>
 			</tr>
 			<tr>
 				<td></td>
-				<td></td>
-				<td><input type="submit" value="Login"></td>
+				<td><center><input type="submit" value="Login"></center></td>
 			</tr>
 			</table>
 			</form>
-			<p><a href="./Registration.html"><h6>Don't have an account? Click here to register!</h6></a></p>
-
-
+			<p><a href="http://www.cs.mcgill.ca/~kye/Registration.html"><h6>Don't have an account? Click here to register!</h6></a></p>
 		</center>
 	</body>
 </html>

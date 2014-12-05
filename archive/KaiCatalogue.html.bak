@@ -3,35 +3,27 @@
 
 <head>
 <style>
-.highlight1{
-	background-color: #CCCC00;
-}
 table, th, td {
-    border: 3px solid black;
+    border: 1px solid black;
     border-collapse: collapse;
 }
 th, td {
-    padding: 15px;
+    padding: 5px;
 }
 
 td {
 	text-align: center;
 }
-input[type="submit"] {
-	height: 3em;
-	font-size: 100%;
-}
 </style>
 </head>
 
 <body>
-<!--C greet grab-->
+
 <br/><br/><center>  <ul>
   					<li><a href="./Home.html">Home</a></li>
   					<li><a href="./Catalogue.html">Catalogue</a></li>
  					<li><a href="./Login.html"target="_blank">Login</a></li>
 				   </ul>
-<!--Message grab-->
 <form method = "post" action = "http://www.cs.mcgill.ca/~kye/cgi-bin/KaiPurchase.py">
 <table style="width:100%">
   <tr> 
@@ -72,7 +64,6 @@ input[type="submit"] {
 </table>
 <!--C hidden input grab-->
 <input type="hidden" name="username" value="jonti">
-<br/>
 <input type="submit" value="Submit order">
 
 </form>

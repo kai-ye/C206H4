@@ -1,0 +1,76 @@
+.highlight1 {
+	background-color: #FFFF00;
+}
+
+a:link, a:visited, a:hover, a:active {
+	background-color: #DDDDDD;
+}
+
+body {
+	/*background-image: url("http://www.cs.mcgill.ca/~kye/Images/night1.jpg");
+	background-position: center;
+	background-repeat: no-repeat;
+	background-attachment: fixed;*/
+	background-color: #003355;
+}
+
+p {
+	color: #CCEEFF;
+}
+
+h1 {
+	color: #CCEEFF;
+	size: 80%;
+}
+
+h6 {
+	color: #CCEEFF;
+}
+
+table.menu {
+	background-color: #DDDDDD;
+}
+
+table.input-boxes {
+	width: 50%;
+	table-layout: fixed;
+	border-width: 0;
+}
+
+table.catalogue {
+    width: 90%;
+}
+
+table.catalogue, th, td.catalogue {
+    border: 3px solid black;
+    border-collapse: collapse;
+}
+
+th, td.catalogue {
+    padding: 15px;
+}
+
+td {
+	color: #CCEEFF;
+	text-align: center;
+}
+
+input[type="text"], input[type="password"] {
+	background-color: transparent;
+	color: #CCEEFF;
+	width: 100%;
+}
+
+input[type="text"].num {
+	width: 4em;
+}
+
+input[type="submit"] {
+	background-color: #003355;
+	color: #CCEEFF;
+}
+
+input[type="submit"].big {
+	height: 3em;
+	font-size: 100%;
+}

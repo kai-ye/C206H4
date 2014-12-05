@@ -1,20 +1,25 @@
 <html>
 	<head>
+		<link rel="stylesheet" type="text/css" href="http://www.cs.mcgill.ca/~kye/style1.css"/>
 		<title>Registration</title>
 	</head>
 
 	<body>
-		<br/><br/> <center> <ul>
-  					<li><a href="./Home.html">Home</a></li>
-  					<li><a href="./Catalogue.html">Catalogue</a></li>
- 					<li><a href="./Login.html"target="_blank">Login</a></li>
-				    </ul>
+		<center>
+			<table class="menu">
+                <tr>
+                    <td><a href="http://www.cs.mcgill.ca/~kye/index.html">Home</a></td>
+                    <td><a href="http://www.cs.mcgill.ca/~kye/Catalogue.html">Catalogue</a></td>
+                    <td><a href="http://www.cs.mcgill.ca/~kye/Login.html" target="_blank">Login</a></td>
+                    <td><a href="http://www.cs.mcgill.ca/~kye/Registration.html">Register</a></td>
+                </tr>
+	        </table>
 
-			<br/><br/><br/><br/>
+			<br/><br/><br/><br/><br/><br/>
 		
 			<h6>Bare-bones registration page. Perhaps change to a more specific font.</h6>
 			<form action="./cgi-bin/Register.pl" method="post">
-			<table border="0">
+			<table class="input-boxes">
 			<tr>
 				<td>Full name</td>
 				<td><input type="text" maxlength="100" name="name"></td>

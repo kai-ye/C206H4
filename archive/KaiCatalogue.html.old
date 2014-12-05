@@ -1,29 +1,25 @@
 <html>
 	<head>
-		<style type="text/css">
-		h6.highlight {
-			background-color: #CCCC00;
-		}
-		body {
-			background-image: url("Images/night1.jpg");
-			background-attachment: fixed;
-		}
-		</style>
-		<title>Test title</title>
+		<title>Catalogue</title>
 	</head>
 
-	<body bgcolor="#003355">
-		<center><h6 class="highlight">Hot topic of the day</h6></center>
+	<body bgcolor="green">
+		<h6>
+		<p align="right">
+			<!--C greet grab-->
+		</p>
+		</h6>
+		<center><h6>Hot topic of the day</h6></center>
 		<p id="header">A paragraph</p>
 		This t<br/>ext.
-		<a href="night1.jpg"><img src="Images/night1.jpg" width="300" border="0" alt="night sky"></a>
+		<a href="http://cs.mcgill.ca/~kye/Images/night1.jpg"><img src="http://cs.mcgill.ca/~kye/Images/night1.jpg" width="300" border="0" alt="night sky"></a>
 		<p>A new paragraph</p>
 		<b>This text.</b><br/>
 		<link rel="google" href="http://www.google.com">
 		<u>Underlining</u>
 		<ul>
-			<li><a href="http://www.cs.mcgill.ca/~kye/test.html#header"><em>item 1</em></a>
-			<li><a href = "Images/night1.jpg" target = "_self">Image</a>
+			<li><a href="#header"><em>item 1</em></a>
+			<li><a href = "http://cs.mcgill.ca/~kye/Images/night1.jpg" target = "_self">Image</a>
 			<li><strong>item 2</strong>
 		</ul>
 		<table border="2">
@@ -41,12 +37,12 @@
 		<td>6</td>
 		</tr>
 		</table>
-		<form action="cgi-bin/PyTest.py" method="post">
+		<form action="http://cs.mcgill.ca/~kye/cgi-bin/CTest.cgi" method="post">
 			<input type="checkbox" name="checkbo1">Checkbox<br/>
 			Run executable test.<input type="submit" value="Submit"><br/>
 			Enter: <input type="password" name="password"><br/>
-			Enter number: <input type="number" name="numeric"><br>
 			<input type="hidden" name="hiddenElem" value="secret">
+			<!--C hidden input grab-->
 		</form>
 	</body>
 </html>

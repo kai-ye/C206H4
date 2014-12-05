@@ -5,14 +5,23 @@
 	</head>
 
 	<body>
-		<br/><br/><br/><br/><br/><br/>
 		<center>
+        <table class="menu">
+                <tr>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/index.html">Home</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Catalogue.html">Catalogue</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Login.html" target="_blank">Login</a></td>
+                        <td><a href="http://www.cs.mcgill.ca/~kye/Registration.html">Register</a></td>
+                </tr>
+        </table>
+
+		<br/><br/><br/><br/><br/><br/>
 			<h6>Bare-bones login page,<br/>
 			    recycled from bare-bones registration page.<br/>
 			    Perhaps change to a more specific font.
 			</h6>
 			<form action="http://www.cs.mcgill.ca/~kye/cgi-bin/Login.cgi" method="post">
-			<table border="0">
+			<table class="input-boxes" border="0">
 			<tr>
 				<td><p>Username</p></td>
 				<td><input type="text" class="text-input" maxlength="20" name="username"></td>
@@ -28,6 +37,7 @@
 			</tr>
 			</table>
 			</form>
+			<p><a href="http://www.cs.mcgill.ca/~kye/Registration.html"><h6>Don't have an account? Click here to register!</h6></a></p>
 		</center>
 	</body>
 </html>
