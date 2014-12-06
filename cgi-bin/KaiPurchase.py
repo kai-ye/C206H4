@@ -7,7 +7,7 @@ cgitb.enable()
 
 LOGGEDINCSV = "../CSV/LoggedIn.csv"
 INVENTORYCSV = "../CSV/Inventory.csv"
-INVFIELDNO = 4	#Number of fields in Invetory csv; only last field may have commas
+INVFIELDNO = 5	#Number of fields in Invetory csv; only last field may have commas
 CATALOGUE = "../Catalogue.html"
 MSGGRAB = "<!--Message grab-->"
 HIDDENGRAB = "<!--C hidden input grab-->"
@@ -15,7 +15,7 @@ HIDDENGRAB = "<!--C hidden input grab-->"
 #Helper class for storing item info
 class Item:
 	def __init__( self, s ):
-                (self.name, self.qty, self.price, self.description) = s.split(",",INVFIELDNO-1)[0:INVFIELDNO]
+                (self.name, self.qty, self.price, self.img, self.description) = s.split(",",INVFIELDNO-1)[0:INVFIELDNO]
 ##########
 def main():
 	form = cgi.FieldStorage()
@@ -54,19 +54,19 @@ def main():
 			quantity = int( quantity )
 			availableQty = int( inventory[ itemName ].qty )
 			if quantity > availableQty:
-				refreshWith( userName, "%d is more than we have for %s. We currently only have %d" % (quantity, itemName, availableQty) )
+				refreshWith( userName, "%d is more than we have for %s. We currently only have %d." % (quantity, itemName, availableQty) )
 			#else
 			if quantity > 0:
 				inventory[ itemName].qty = str( availableQty - quantity)#subtract from inv
 				purchase[ itemName ] = ( quantity, float( inventory[ itemName ].price) )
 	
 	if not purchase:	#If no purchase
-		refreshWith( userName, "You have ordered zero items.<br/>Remember to check the boxes for the items to be purchased.<br/><br/>" )
+		refreshWith( userName, "You have ordered zero items.<br/>Remember to check the boxes for the items to be purchased." )
 
 	#All went well. Update inventory csv.
 	OUT = open( INVENTORYCSV, "w")
 	for item in inventory.itervalues():
-		OUT.write(",".join(( item.name, item.qty, item.price, item.description )) + "\n")
+		OUT.write(",".join(( item.name, item.qty, item.price, item.img, item.description )) + "\n")
 	OUT.close()
 
 	displayBill( purchase )
@@ -173,6 +173,14 @@ def displayBill( purchase ):
 	<tr>
 	<td colspan="4"><hr/>Total: %.2f</td>
 	</tr>
+	</table>
+	<br/><br/>
+	Return to:
+	<table class="menu">
+		<tr>
+            <td><a href="http://www.cs.mcgill.ca/~kye/index.html">Home</a></td>
+            <td><a href="http://www.cs.mcgill.ca/~kye/Catalogue.html">Catalogue</a></td>
+		</tr>
 	</table>
 </center>
 </body>""" % total

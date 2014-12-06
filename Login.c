@@ -213,7 +213,27 @@ void checkMalloc( const void* ptr, const char* nameOfString){
 //Displays html with message, and exits with exitValue
 void exitWith( const char* Message, const int exitValue){
 	puts("Content-type:text/html\n\n");
-	printf("%s", Message);
+	printf(
+"<html>"
+"<head>"
+"	<link rel=\"stylesheet\" type=\"text/css\" href=\"http://www.cs.mcgill.ca/~kye/style1.css\"/>"
+"	<title>Login failure</title>"
+"</head>"
+"<body>"
+"<center>"
+"<br/><br/><br/><br/><br/><br/>"
+"	%s<br/>"
+"Return to: "
+"	<table class=\"menu\">"
+"		<tr>"
+"			<td><a href=\"http://www.cs.mcgill.ca/~kye/index.html\">Home</a></td>"
+"            <td><a href=\"http://www.cs.mcgill.ca/~kye/Login.html\">Login</a></td>"
+"		</tr>"
+"	</table>"
+"</center>"
+"</body>"
+"</html>",
+		Message);
 	exit( exitValue );
 }
 

@@ -1,12 +1,20 @@
 div.light {
 	color: #CCEEFF;
 }
+
 .highlight1 {
 	background-color: #FFFF00;
+	color: black;
 }
 
-a:link, a:visited, a:hover, a:active {
-	background-color: #DDDDDD;
+a {
+	text-decoration: none;
+	color: #CCEEFF;
+	color: white;
+}
+
+a:hover {
+	color: yellow;
 }
 
 body {
@@ -15,6 +23,7 @@ body {
 	background-repeat: no-repeat;
 	background-attachment: fixed;*/
 	background-color: #003355;
+	color: #CCEEFF;
 }
 
 p {
@@ -30,8 +39,14 @@ h6 {
 	color: #CCEEFF;
 }
 
+h4 {
+	color: yellow;
+}
+
 table.menu {
-	background-color: #DDDDDD;
+	border-collapse: separate;
+	border-spacing: 30px 0px;
+	background-color: transparent;
 }
 
 table.input-boxes {
@@ -53,7 +68,7 @@ th, td.catalogue {
     padding: 15px;
 }
 
-td {
+th, td {
 	color: #CCEEFF;
 	text-align: center;
 }

@@ -12,11 +12,11 @@ STARTGRAB = "<!--Update grab-->"
 ENDGRAB = "<!--Update grab end-->"
 OUTPUTFILE = sys.argv[2]
 CSVFILE = sys.argv[3]
-CSVFIELDNO = 4	#no. of fields; only last field may contain commas
+CSVFIELDNO = 5	#no. of fields; only last field may contain commas
 
 class Item:
 	def __init__( self, s ):
-		(self.name, self.qty, self.price, self.description) = s.split(",",CSVFIELDNO-1)[0:CSVFIELDNO]
+		(self.name, self.qty, self.price, self.img, self.description) = s.split(",",CSVFIELDNO-1)[0:CSVFIELDNO]
 
 csv = open( CSVFILE, "r")
 temp = open( TEMPLATE, "r")
@@ -39,21 +39,18 @@ for line in csv:
 	out.write(
 """\
   <tr>
-    <td class="catalogue"><img src="http://www.cs.mcgill.ca/~kye/Images/{0}.jpg" width="400"></td>
-    <td class="catalogue">
-	{0}
-	<br/><br/>
-	{3}
-	</td>
-	<td class="catalogue">{2:.2f}</td>
-	<td class="catalogue">{1}</td>
+	<td class="catalogue">{0}</td>
+    <td class="catalogue"><img src="http://www.cs.mcgill.ca/~kye/Images/{1}" width="400"></td>
+    <td class="catalogue">{2}</td>
+	<td class="catalogue">{3:.2f}</td>
+	<td class="catalogue">{4}</td>
     <td class="catalogue">
     Purchase: <input type="checkbox" name = "BUY{0}" value = "{0}"><br/><br/>
     <input type="text" class="num" maxlength="6" name="{0}" value="0">
     </td>
   </tr>
 
-""".format(item.name, item.qty, float(item.price), item.description)
+""".format(item.name, item.img, item.description, float(item.price), item.qty)
 )
 
 line = temp.readline()
