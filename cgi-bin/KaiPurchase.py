@@ -54,7 +54,7 @@ def main():
 			quantity = int( quantity )
 			availableQty = int( inventory[ itemName ].qty )
 			if quantity > availableQty:
-				refreshWith( userName, "%d is more than we have for %s.<br/><br/>" % (quantity, itemName) )
+				refreshWith( userName, "%d is more than we have for %s. We currently only have %d<br/><br/>" % (quantity, itemName, availableQty) )
 			#else
 			if quantity > 0:
 				inventory[ itemName].qty = str( availableQty - quantity)#subtract from inv
