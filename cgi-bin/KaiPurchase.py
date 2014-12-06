@@ -45,16 +45,16 @@ def main():
 		if inputName[:3] == "BUY":	#If this is a checkbox input
 			itemName = inputName[3:]#Name of item to be purchased
 			if not itemName in inventory.keys():
-				refreshWith( userName, "%s is no longer available.<br/><br/>" % itemName)
+				refreshWith( userName, "%s is no longer available." % itemName)
 			#else
 			quantity = form.getvalue( itemName)#quantity input
 			if not quantity.isdigit():
-				refreshWith( userName, "Invalid amount for %s.<br/><br/>" % itemName)
+				refreshWith( userName, "Invalid amount for %s." % itemName)
 			#else
 			quantity = int( quantity )
 			availableQty = int( inventory[ itemName ].qty )
 			if quantity > availableQty:
-				refreshWith( userName, "%d is more than we have for %s.<br/><br/>" % (quantity, itemName) )
+				refreshWith( userName, "%d is more than we have for %s. We currently only have %d" % (quantity, itemName, availableQty) )
 			#else
 			if quantity > 0:
 				inventory[ itemName].qty = str( availableQty - quantity)#subtract from inv
@@ -114,7 +114,7 @@ def refreshWith( user, message):
 	line = HTML.readline()
 	while line:
 		if MSGGRAB in line:
-			print '<b class="highlight1">'+message+"</b>"
+			print '<b class="highlight1">'+message+"</b><br/><br/>"
 		if HIDDENGRAB in line:
 			print """<input type="hidden" name="username" value="%s">""" % user
 		print line,

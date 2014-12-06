@@ -40,14 +40,20 @@ for line in csv:
 """\
   <tr>
     <td class="catalogue"><img src="http://www.cs.mcgill.ca/~kye/Images/{0}.jpg" width="400"></td>
-    <td class="catalogue">{3}</td>
+    <td class="catalogue">
+	{0}
+	<br/><br/>
+	{3}
+	</td>
+	<td class="catalogue">{2:.2f}</td>
+	<td class="catalogue">{1}</td>
     <td class="catalogue">
     Purchase: <input type="checkbox" name = "BUY{0}" value = "{0}"><br/><br/>
     <input type="text" class="num" maxlength="6" name="{0}" value="0">
     </td>
   </tr>
 
-""".format(item.name, item.qty, item.price, item.description)
+""".format(item.name, item.qty, float(item.price), item.description)
 )
 
 line = temp.readline()
