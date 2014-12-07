@@ -16,6 +16,9 @@ HIDDENGRAB = "<!--C hidden input grab-->"
 class Item:
 	def __init__( self, s ):
                 (self.name, self.qty, self.price, self.img, self.description) = s.split(",",INVFIELDNO-1)[0:INVFIELDNO]
+
+
+
 ##########
 def main():
 	form = cgi.FieldStorage()
@@ -48,7 +51,7 @@ def main():
 				refreshWith( userName, "%s is no longer available." % itemName)
 			#else
 			quantity = form.getvalue( itemName)#quantity input
-			if not quantity.isdigit():
+			if ( not quantity ) or ( not quantity.isdigit() ):
 				refreshWith( userName, "Invalid amount for %s." % itemName)
 			#else
 			quantity = int( quantity )
@@ -121,6 +124,9 @@ def refreshWith( user, message):
 		line = HTML.readline()
 	HTML.close()
 	sys.exit(0)
+
+
+
 ##########
 def displayBill( purchase ):
 	print """Content-type:text/html
