@@ -21,7 +21,7 @@ typedef struct map{//struct for linked pairs of key and value
 	struct map *next;
 }MAP;
 
-void putsDecoded( char*, int*, const char);
+void putsDecoded( char*, int*, const char, const size_t);
 void getMAP( MAP*, int*);
 void getInput( MAP*, int);
 char* getValue( const MAP*, const char*);
@@ -94,27 +94,34 @@ void getInput( MAP* paramCurr, int len){
 
 //Decodes cgi input up to *lenPtr characters or until '&', and stores into param
 void getMAP( MAP* param, int *lenPtr ){
-	checkMalloc( param->key = malloc(MAXKEYLEN), "input name");
-	putsDecoded( param->key, lenPtr, '=' );
-	checkMalloc( param->value = malloc(MAXVALUELEN), "input value");
-	putsDecoded( param->value, lenPtr, '&' );
+	checkMalloc( param->key = malloc(MAXKEYLEN + 1), "input name");
+	putsDecoded( param->key, lenPtr, '=', MAXKEYLEN );
+	checkMalloc( param->value = malloc(MAXVALUELEN + 1), "input value");
+	putsDecoded( param->value, lenPtr, '&', MAXVALUELEN );
 }
 
 //Decodes cgi input up to *lenPtr characters or the delim character and stores in s
-void putsDecoded( char* s, int* lenPtr, const char delim ){
+//Returns empty string if input to be decoded has length > maxLen, but reads and discards input anyway
+void putsDecoded( char* s, int* lenPtr, const char delim, const size_t maxLen ){
 	int i=0, c;
 	while( *lenPtr > 0 && ( c = getchar() ) != delim ){
-		if( c == '%' ){//decode escaped hexadecimal ASCII character
-			*lenPtr = *lenPtr - 3;
-			scanf("%2x", &c);
+		if( i < maxLen ) {
+			if( c == '%' ){//decode escaped hexadecimal ASCII character
+				*lenPtr = *lenPtr - 3;//Deduct from lengthof remaining input
+				scanf("%2x", &c);
+			}
+			else{
+				--*lenPtr;//Deduct from length of remaining input
+				if ( c == '+' )//replace + with space
+					c = ' ';
+			}
+			s[i] = c;
+			i++;
 		}
-		else{
-			--*lenPtr;
-			if ( c == '+' )//replace + with space
-				c = ' ';
+		else {//Input exceeds length
+			if( i ) i = 0;
+			--*lenPtr;//Deduct from length of remaining input
 		}
-		s[i] = c;
-		i++;
 	}
 	s[i] = '\0';
 	if ( c == delim ) --*lenPtr;

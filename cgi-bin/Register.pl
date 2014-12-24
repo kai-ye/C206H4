@@ -17,6 +17,7 @@ my $REGISTERBUTTON = qq{
 
 my $name = param('name');
 my $username = param('username');
+my $passSym = quotemeta( '`~!@#$%^&*()_+-=' );
 my $password = param('password');
 my $repassword = param('re-password');
 
@@ -41,8 +42,8 @@ else{
 }
 
 #Check password validity
-if ( $password !~ /^[a-zA-Z0-9]{4,30}$/ ){
-	SHOW("Password must consist of 4-30 ASCII letters and digits.<br/>
+if ( $password !~ /^[a-zA-Z0-9${passSym}]{4,30}$/ ){
+	SHOW("Password must consist of 4-30 ASCII letters, digits, symbols ".eval( "\"$passSym\"" )."<br/>
 		\n$REGISTERBUTTON");
 }
 

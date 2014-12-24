@@ -1,6 +1,13 @@
 <html>
 	<head>
 		<style type="text/css">
+
+		#canvas {
+			width: 100%;
+			height: 100%;
+			position: absolute;
+			background-color: #003355;
+		}
 		h6.highlight {
 			background-color: #CCCC00;
 		}
@@ -10,49 +17,56 @@
 		}
 
 		body {
-			background-image: url("Images/night1.jpg");
-			background-attachment: fixed;
+			margin: 0;
 		}
+	
+		.slide1 {
+			position: relative;
+			width: 100%;
+			height: 100px;
+			background-color: yellow;
+		}
+		
+		.slide2 {
+			position: relative;
+			width: 100%;
+			height: 100px;
+			background-color: green;
+		}
+
 		</style>
+
 		<title>Test title</title>
+
 	</head>
 
-	<body bgcolor="#003355">
-		<center><h6 class="highlight">Hot topic of the day</h6></center>
+	<body>
+	<div id="canvas">
 		<p id="header">A paragraph</p>
-		This t<br/>ext.
-		<a href="night1.jpg"><img src="Images/night1.jpg" width="300" border="0" alt="night sky"></a>
-		<p>A new paragraph</p>
-		<b>This text.</b><br/>
 		<div class="light">Light</div>
-		<link rel="google" href="http://www.google.com">
-		<u>Underlining</u>
-		<ul>
-			<li><a href="http://www.cs.mcgill.ca/~kye/test.html#header"><em>item 1</em></a>
-			<li><a href = "Images/night1.jpg" target = "_self">Image</a>
-			<li><strong>item 2</strong>
-		</ul>
-		<table border="2">
-		<tr>
-		<th>this</th>
-		<th>that</th>
-		</tr>
-		<tr>
-		<td>1</td>
-		<td>2</td>
-		</tr>
-		<tr>
-		<td>4</td>
-		<td>5</td>
-		<td>6</td>
-		</tr>
-		</table>
-		<form action="cgi-bin/PyTest.py" method="post">
+		<form action="http://cs.mcgill.ca/~kye/cgi-bin/perlT.cgi" action="../updateCatalogue.sh" method="post">
 			<input type="checkbox" name="checkbo1">Checkbox<br/>
-			Run executable test.<input type="submit" value="Submit"><br/>
-			Enter: <input type="password" name="password"><br/>
-			Enter number: <input type="number" name="numeric"><br>
+			<input type="submit" value="Submit"><br/>
+			<input type="password" name="password"><br/>
+			<input type="text" name="text" maxlength="5"><br>
 			<input type="hidden" name="hiddenElem" value="secret">
 		</form>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+		<div class="slide1"></div>
+		<div class="slide2"></div>
+	</div>
 	</body>
 </html>

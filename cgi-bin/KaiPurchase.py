@@ -9,6 +9,9 @@ LOGGEDINCSV = "../CSV/LoggedIn.csv"
 INVENTORYCSV = "../CSV/Inventory.csv"
 INVFIELDNO = 5	#Number of fields in Invetory csv; only last field may have commas
 CATALOGUE = "../Catalogue.html"
+CATALOGUEBAK = "../Catalogue.html.bak"
+UPDATEBEGIN = "<!--Update grab-->"
+UPDATEEND = "<!--Update grab end-->"
 MSGGRAB = "<!--Message grab-->"
 HIDDENGRAB = "<!--C hidden input grab-->"
 
@@ -16,6 +19,25 @@ HIDDENGRAB = "<!--C hidden input grab-->"
 class Item:
 	def __init__( self, s ):
                 (self.name, self.qty, self.price, self.img, self.description) = s.split(",",INVFIELDNO-1)[0:INVFIELDNO]
+
+	def writeTo( self, out ):
+		out.write(
+"""\
+  <tr>
+    <td class="catalogue">{0}</td>
+    <td class="catalogue"><img src="http://www.cs.mcgill.ca/~kye/Images/{1}" width="400"></td>
+    <td class="catalogue">{2}</td>
+    <td class="catalogue">{3:.2f}</td>
+    <td class="catalogue">{4}</td>
+    <td class="catalogue">
+    Purchase: <input type="checkbox" name = "BUY{0}" value = "{0}"><br/><br/>
+    <input type="text" class="num" maxlength="6" name="{0}" value="0">
+    </td>
+  </tr>
+
+""".format(self.name, self.img, self.description, float(self.price), self.qty)
+)
+
 
 
 
@@ -72,7 +94,53 @@ def main():
 		OUT.write(",".join(( item.name, item.qty, item.price, item.img, item.description )) + "\n")
 	OUT.close()
 
+	#Update Catalogue html
+	updateCatalogue( inventory.itervalues() )
+
 	displayBill( purchase )
+
+
+
+##########
+def updateCatalogue( items ):
+	inf = open( CATALOGUE, "r")
+	with open( CATALOGUEBAK, "w") as out:
+		for line in inf:
+			out.write( line )
+	inf.close()
+
+	inf = open( CATALOGUEBAK, "r" )
+	with open( CATALOGUE, "w" ) as out:
+		line = inf.readline()
+		while line and ( not UPDATEBEGIN in line ):
+			out.write( line )
+			line = inf.readline()
+		
+		if not line:
+			out.seek(0,0)
+			out.truncate()
+			out.write("""<p color="#CC0000">Update grab not found.<br></p>""")
+			sys.exit(1)
+		
+		out.write(line) #Put grab back in.
+		for item in items:
+			item.writeTo( out )
+
+		line = inf.readline()
+		while line and ( not UPDATEEND in line):
+			line = inf.readline()
+
+		if not line:
+			out.seek(0,0)
+			out.truncate()
+			out.write("""<p color="#CC0000">Update end grab not found.<br></p>""")
+			sys.exit(1)
+
+		out.write( line ) #Put end grab back in.
+		for line in inf:
+			out.write( line )
+		
+	inf.close()
 
 
 
